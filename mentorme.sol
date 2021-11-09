@@ -45,7 +45,14 @@ contract MentorMe {
         uint _supported,
         uint _supporters
     ) public {
-
+        require(
+          IERC20Token(cUsdTokenAddress).transferFrom(
+            msg.sender,
+            address(this),
+            1000000000000000000
+          ),
+          "Could not add creator"
+        );
         creators[Creatorlength] = Creator(
             payable(msg.sender),
             _name,
@@ -105,15 +112,4 @@ contract MentorMe {
     
     
 }
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
+
