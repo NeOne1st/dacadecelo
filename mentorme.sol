@@ -45,6 +45,10 @@ contract MentorMe {
         uint _supported,
         uint _supporters
     ) public {
+        require(bytes(_name).length > 0, "Name should not be empty.");
+        require(bytes(_description).length > 0, "Description should not be empty.");
+        require(_supported > 0, "Supported should be greater than zero.");
+        require(_supporters > 0, "Supporters should be greater than zero.");
 
         creators[Creatorlength] = Creator(
             payable(msg.sender),
@@ -84,10 +88,12 @@ contract MentorMe {
         
         if (isSupporting[_index][msg.sender] != true) {
             creators[_index].supporters ++;
+            supporters[_index].push(msg.sender);
         }
         
         creators[_index].supported += _amount;
         isSupporting[_index][msg.sender] = true;
+        investAmount[_index][msg.sender] += _amount;
         
     }
     
@@ -105,15 +111,3 @@ contract MentorMe {
     
     
 }
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
